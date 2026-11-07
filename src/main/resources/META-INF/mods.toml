@@ -1,0 +1,41 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+
+[[mods]]
+modId="fiststyle"
+version="1.20.1"
+displayName="Fight Style"
+logoFile="logo.png"
+description='''
+Twelve invisible "Fight Style" items that switch you to a different Epic Fight fist style,
+using Weapons of Miracles movesets.
+'''
+
+[[dependencies.fiststyle]]
+modId="forge"
+mandatory=true
+versionRange="[47,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.fiststyle]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.21)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.fiststyle]]
+modId="epicfight"
+mandatory=true
+versionRange="[20.14.17,)"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.fiststyle]]
+modId="wom"
+mandatory=true
+versionRange="[2.0.171,)"
+ordering="AFTER"
+side="BOTH"

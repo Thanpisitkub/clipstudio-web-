@@ -1,0 +1,10 @@
+{
+  "type": "fiststyle:god_fist",
+  "attributes": {
+    "common": {
+      "armor_negation": 40.0,
+      "impact": 3.5,
+      "max_strikes": 4
+    }
+  }
+}

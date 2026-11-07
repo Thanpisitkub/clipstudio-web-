@@ -1,0 +1,10 @@
+{
+  "type": "fiststyle:iron_fist",
+  "attributes": {
+    "common": {
+      "armor_negation": 35.0,
+      "impact": 3.0,
+      "max_strikes": 2
+    }
+  }
+}

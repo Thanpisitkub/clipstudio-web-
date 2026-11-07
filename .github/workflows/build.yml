@@ -1,0 +1,75 @@
+name: Build jar
+
+permissions:
+  contents: write
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.8'
+
+      # Epic Fight and Weapons of Miracles are needed to compile, but are not
+      # stored in this repo. They are downloaded from Modrinth at build time.
+      - name: Download dependency jars
+        run: |
+          set -euo pipefail
+          mkdir -p libs
+          get() { # project  version-substring  output-name
+            url="https://api.modrinth.com/v2/project/$1/version?loaders=%5B%22forge%22%5D&game_versions=%5B%221.20.1%22%5D"
+            file_url=$(curl -fsSL "$url" | jq -r --arg v "$2" '[.[] | select(.version_number | contains($v))][0].files | (map(select(.primary)) + .)[0].url')
+            if [ -z "$file_url" ] || [ "$file_url" = "null" ]; then
+              echo "Could not find $1 version containing $2 on Modrinth" >&2
+              exit 1
+            fi
+            curl -fsSL -o "libs/$3" "$file_url"
+            ls -l "libs/$3"
+          }
+          get epic-fight 20.14.17 epicfight-20.14.17.jar
+          get oWx9p4ug 2.0.171 wom-2.0.171.jar
+
+      - name: Build
+        shell: bash
+        run: |
+          set -o pipefail
+          gradle build --no-daemon 2>&1 | tee build.log
+
+      - name: Publish compile errors on failure
+        if: failure()
+        run: |
+          grep -E "error:|symbol:|location:|What went wrong" -A2 build.log | head -150 > /tmp/errors.txt || true
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git checkout --orphan build-errors
+          git rm -rf . -q || true
+          cp /tmp/errors.txt errors.txt
+          git add errors.txt
+          git commit -q -m "build errors"
+          git push -f origin build-errors
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fiststyle-1.20.1
+          path: build/libs/fiststyle-1.20.1.jar
+          if-no-files-found: error
+
+      - name: Publish jar to Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete latest-jar --yes --cleanup-tag || true
+          gh release create latest-jar build/libs/fiststyle-1.20.1.jar --title "Fight Style 1.20.1" --notes "Built automatically from main."

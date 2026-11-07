@@ -1,0 +1,10 @@
+{
+  "type": "fiststyle:phantom_fist",
+  "attributes": {
+    "common": {
+      "armor_negation": 30.0,
+      "impact": 1.3,
+      "max_strikes": 2
+    }
+  }
+}

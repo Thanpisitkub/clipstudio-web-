@@ -1,0 +1,10 @@
+{
+  "type": "fiststyle:shadow_fist",
+  "attributes": {
+    "common": {
+      "armor_negation": 25.0,
+      "impact": 1.2,
+      "max_strikes": 2
+    }
+  }
+}
