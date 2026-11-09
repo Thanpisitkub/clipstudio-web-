@@ -10,18 +10,18 @@
 
 | ไอเท็ม | id | สไตล์ | ท่าที่ใช้ (ทั้งหมดมาจาก Weapons of Miracles) | ดาเมจ (ค่าเริ่มต้น) |
 |---|---|---|---|---|
-| Fight Style 1 | `fiststyle:fight_style_1` | Light Fist | Blackstar (กระโดด: Agony) ไม่มีหลอด | 3.90 – 5.00 |
-| Fight Style 2 | `fiststyle:fight_style_2` | Heavy Fist | Torment | 5.00 – 8.00 |
-| Fight Style 3 | `fiststyle:fight_style_3` | Drunken Fist | ท่า Heavy Fist สลับลำดับ | 4.50 – 7.00 |
-| Fight Style 4 | `fiststyle:fight_style_4` | Dragon Fist | Orbit | 4.20 – 6.00 |
-| Fight Style 5 | `fiststyle:fight_style_5` | Shadow Fist | Moonless | 3.60 – 5.20 |
-| Fight Style 6 | `fiststyle:fight_style_6` | Tiger Fist | Agony | 4.50 – 6.50 |
-| Fight Style 7 | `fiststyle:fight_style_7` | Thunder Fist | Nova | 4.00 – 5.80 |
-| Fight Style 8 | `fiststyle:fight_style_8` | Wind Fist | Epic Sanji (สำรอง: Blackstar) | 3.50 – 5.00 |
-| Fight Style 9 | `fiststyle:fight_style_9` | Iron Fist | Antitheus | 5.00 – 7.50 |
-| Fight Style 10 | `fiststyle:fight_style_10` | Flame Fist | Epic Sanji Diable Jambe (สำรอง: Blackstar) ไม่มีหลอด Solar | 4.50 – 6.50 |
-| Fight Style 11 | `fiststyle:fight_style_11` | Phantom Fist | Ender Blaster สองมือ ไม่มีหลอด | 3.80 – 5.50 |
-| Fight Style 12 | `fiststyle:fight_style_12` | God Fist | Herrscher | 5.50 – 8.00 |
+| Fight Style 1 | `fiststyle:fight_style_1` | Light Fist | Ender Blaster มือเดียว ผสม Nova 1 ท่า | 3.90 – 5.00 |
+| Fight Style 2 | `fiststyle:fight_style_2` | Heavy Fist | Torment ผสม Orbit 1 ท่า | 5.00 – 8.00 |
+| Fight Style 3 | `fiststyle:fight_style_3` | Drunken Fist | Torment สลับลำดับ ผสม Blackstar และ Nova | 4.50 – 7.00 |
+| Fight Style 4 | `fiststyle:fight_style_4` | Dragon Fist | Orbit ผสม Agony 1 ท่า และ Nova ท่ากระโดด | 4.20 – 6.00 |
+| Fight Style 5 | `fiststyle:fight_style_5` | Shadow Fist | Moonless ผสม Ender Blaster 1 ท่า | 3.60 – 5.20 |
+| Fight Style 6 | `fiststyle:fight_style_6` | Tiger Fist | Agony ผสม Blackstar 1 ท่า | 4.50 – 6.50 |
+| Fight Style 7 | `fiststyle:fight_style_7` | Thunder Fist | Nova ผสม Ender Blaster สองมือ 1 ท่า | 4.00 – 5.80 |
+| Fight Style 8 | `fiststyle:fight_style_8` | Wind Fist | Epic Sanji (สำรอง: Blackstar) + Orbit ท่าวิ่ง + Agony ท่ากระโดด | 3.50 – 5.00 |
+| Fight Style 9 | `fiststyle:fight_style_9` | Iron Fist | Antitheus ผสม Blackstar 1 ท่า | 5.00 – 7.50 |
+| Fight Style 10 | `fiststyle:fight_style_10` | Flame Fist | Epic Sanji Diable Jambe (สำรอง: Blackstar) + Agony ท่ากระโดด ไม่มีหลอด Solar | 4.50 – 6.50 |
+| Fight Style 11 | `fiststyle:fight_style_11` | Phantom Fist | Ender Blaster สองมือ ผสม Orbit, Blackstar, Nova | 3.80 – 5.50 |
+| Fight Style 12 | `fiststyle:fight_style_12` | God Fist | Herrscher ผสม Orbit 1 ท่า | 5.50 – 8.00 |
 | Fight Style 13 | `fiststyle:fight_style_13` | Sanji Fist | Epic Sanji (สำรอง: Blackstar) ท่ากระโดด = Ender Blaster สองมือ (Tishnaw) | 4.00 – 5.60 |
 
 ทุกสไตล์ใช้ท่ายืน/เดิน/วิ่ง/ป้องกันมือเปล่าชุดเดียวกัน (Agony) ไม่ใช้ท่ายืนถือดาบ ส่วนท่าตีใช้ของ WoM / Epic Sanji
@@ -36,9 +36,13 @@
   ชื่อใช้รูปแบบ `Class.FIELD` เช่น `Agony.AGONY_AUTO_1` (คลาส: WOM, Agony, Enderblaster, Nova, Orbit, Moonless, Blackstar, Solar, Ruine, Herrscher, Satsujin, Sanji)
   เขียน `A|B` ได้ ถ้าไม่มี A จะใช้ B
 
+## หมายเหตุ: ทุกสไตล์เป็นท่าผสม
+
+ทุกสไตล์ผสมท่าเดี่ยวจากหลายชุด ท่าของ Torment/Antitheus/Moonless/Herrscher ต้องใช้ passive ของชุดตัวเอง (ผู้เล่นมีได้ตัวเดียว) จึงผสมได้เฉพาะท่าที่ไม่ต้องใช้ skill เช่น Ender Blaster, Nova, Orbit, Blackstar, Sanji
+
 ## หมัด 3 ของ Light Fist (อัปเปอร์คัต)
 
-ช่องหมัด 3 ของ Light Fist ตอนนี้ใช้ `Blackstar.BLACKSTAR_ATTACK_3` **ยังไม่ได้ยืนยันว่าเป็นท่าต่อยขึ้น**
+ช่องหมัด 3 ของ Light Fist ตอนนี้ใช้ `Nova.NOVA_ATTACK_3` **ยังไม่ได้ยืนยันว่าเป็นท่าต่อยขึ้น**
 ลองในเกมแล้วถ้าไม่ใช่ ให้แก้ช่องที่ 3 ของ `light_fist` ใน `config/fiststyle-combos.json`
 
 ## Epic Sanji (Wind Fist / Flame Fist)
