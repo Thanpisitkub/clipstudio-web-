@@ -12,7 +12,7 @@
 |---|---|---|---|---|
 | Fight Style 1 | `fiststyle:fight_style_1` | Light Fist | Ender Blaster มือเดียว + Agony (วิ่ง/กระโดด) | 3.90 – 5.00 |
 | Fight Style 2 | `fiststyle:fight_style_2` | Heavy Fist | Torment | 5.00 – 8.00 |
-| Fight Style 3 | `fiststyle:fight_style_3` | Drunken Fist | ท่า Heavy Fist สลับลำดับ + ท่ายืน Moonless | 4.50 – 7.00 |
+| Fight Style 3 | `fiststyle:fight_style_3` | Drunken Fist | ท่า Heavy Fist สลับลำดับ | 4.50 – 7.00 |
 | Fight Style 4 | `fiststyle:fight_style_4` | Dragon Fist | Orbit | 4.20 – 6.00 |
 | Fight Style 5 | `fiststyle:fight_style_5` | Shadow Fist | Moonless | 3.60 – 5.20 |
 | Fight Style 6 | `fiststyle:fight_style_6` | Tiger Fist | Agony | 4.50 – 6.50 |
@@ -64,3 +64,9 @@ Build เองในเครื่อง: ใส่ `epicfight-20.14.17.jar` �
 
 ดูหัวข้อ "ทดสอบแล้ว / ยังไม่ได้ทดสอบ" ใน release notes หรือที่ผมสรุปไว้ในแชท
 ทุกอย่างที่เกี่ยวกับการเล่นจริง (animation, คอมโบ, ดาเมจ, multiplayer) ต้องทดสอบในเกม
+
+## หมายเหตุ: skill ของ Weapons of Miracles
+
+ท่าของ WoM (Moonless, Torment, Herrscher, Solar, Antitheus) อ่านข้อมูลจาก skill ของอาวุธนั้น ๆ ถ้าไม่มี skill เกมจะ crash ("SkillDataKey is unregistered")
+แต่ละสไตล์จึงติด skill passive/innate ชุดเดียวกับอาวุธ WoM ที่ท่ามาจาก (เช่น Shadow Fist = Lunar Echo, God Fist = Herrscher)
+ถ้าเคยรันเกมมาแล้ว ให้ลบ `config/fiststyle-combos.json` เพื่อให้สร้างใหม่ (ไฟล์เก่ายังมีท่ายืนของ Drunken Fist และท่ากระโดดของ Flame Fist แบบเดิม)

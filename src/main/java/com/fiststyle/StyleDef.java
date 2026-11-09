@@ -47,9 +47,10 @@ public record StyleDef(int number, String presetId, String internalName, double 
             "WOM.TORMENT_AUTO_1", "WOM.TORMENT_AUTO_2", "WOM.TORMENT_AUTO_3", "WOM.TORMENT_AUTO_4",
             "WOM.TORMENT_DASH", "WOM.TORMENT_AIRSLAM"}),
 
-        // 3. Drunken Fist: reuses the Heavy Fist animations in a different order and with Moonless' swaying stance.
+        // 3. Drunken Fist: reuses the Heavy Fist animations in a different order (same Torment stance: mixing in Moonless
+        //    would need a second weapon passive skill, and a player can only have one).
         new StyleDef(3, "drunken_fist", "Drunken Fist", 4.50, 7.00,
-            stance("Moonless.MOONLESS_IDLE", "Moonless.MOONLESS_WALK", "Moonless.MOONLESS_RUN"), new String[] {
+            stance("WOM.TORMENT_IDLE", "WOM.TORMENT_WALK", "WOM.TORMENT_RUN"), new String[] {
             "WOM.TORMENT_AUTO_3", "WOM.TORMENT_AUTO_1", "WOM.TORMENT_AUTO_4", "WOM.TORMENT_AUTO_2",
             "WOM.TORMENT_DASH", "WOM.TORMENT_AIRSLAM"}),
 
@@ -92,7 +93,7 @@ public record StyleDef(int number, String presetId, String internalName, double 
         new StyleDef(10, "flame_fist", "Flame Fist", 4.50, 6.50, AGONY_STANCE, new String[] {
             "Sanji.DIABLE_AUTO_1|Solar.SOLAR_OBSCURIDAD_AUTO_1", "Sanji.DIABLE_AUTO_2|Solar.SOLAR_OBSCURIDAD_AUTO_2",
             "Sanji.DIABLE_AUTO_3|Solar.SOLAR_OBSCURIDAD_AUTO_3", "Sanji.DIABLE_AUTO_4|Solar.SOLAR_OBSCURIDAD_AUTO_4",
-            "Sanji.DIABLE_ANTIMANER|Solar.SOLAR_OBSCURIDAD_IMPACTO", "Ruine.RUINE_COMET"}),
+            "Sanji.DIABLE_ANTIMANER|Solar.SOLAR_OBSCURIDAD_IMPACTO", "Sanji.DIABLE_ANTIMANER|Solar.SOLAR_OBSCURIDAD_IMPACTO"}),
 
         // 11. Phantom Fist: the Ender Blaster two-hand set.
         new StyleDef(11, "phantom_fist", "Phantom Fist", 3.80, 5.50, AGONY_STANCE, new String[] {

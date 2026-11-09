@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
@@ -21,6 +22,7 @@ import yesman.epicfight.api.asset.AssetAccessor;
 import yesman.epicfight.api.forgeevent.WeaponCapabilityPresetRegistryEvent;
 import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.world.capabilities.item.CapabilityItem;
+import yesman.epicfight.skill.Skill;
 import yesman.epicfight.world.capabilities.item.WeaponCapability;
 
 /**
@@ -54,8 +56,18 @@ public final class StylePresets {
             .styleProvider(entitypatch -> CapabilityItem.Styles.TWO_HAND)
             .collider(WOMWeaponColliders.AGONY)
             .hitSound(EpicFightSounds.BLUNT_HIT.get())
-            .canBePlacedOffhand(false)
-            .innateSkill(CapabilityItem.Styles.TWO_HAND, itemstack -> WOMSkills.AGONY_PLUNGE);
+            .canBePlacedOffhand(false);
+
+        // Many Weapons of Miracles animations read data that only the skills of their own weapon register (for example
+        // Moonless needs the Lunar Echo passive). Without them the server throws "SkillDataKey is unregistered" while the
+        // animation starts, so every style carries the same skills as the Weapons of Miracles weapon its moves come from.
+        Supplier<Skill> innate = innateSkill(def);
+        builder.innateSkill(CapabilityItem.Styles.TWO_HAND, itemstack -> innate.get());
+        Skill passive = passiveSkill(def);
+
+        if (passive != null) {
+            builder.passiveSkill(passive);
+        }
 
         String[] stance = FistConfig.stance(def);
         motion(builder, LivingMotions.IDLE, stance[0], def);
@@ -81,6 +93,32 @@ public final class StylePresets {
         applyAnimationSpeed(def, combo);
         builder.newStyleCombo(CapabilityItem.Styles.TWO_HAND, combo);
         return builder;
+    }
+
+    /** Innate (weapon skill) that goes with the animation set of the style, as on the Weapons of Miracles weapon. */
+    private static Supplier<Skill> innateSkill(StyleDef def) {
+        return switch (def.presetId()) {
+            case "heavy_fist", "drunken_fist" -> () -> WOMSkills.TRUE_BERSERK;
+            case "dragon_fist" -> () -> WOMSkills.ORBITAL_BEAM;
+            case "shadow_fist" -> () -> WOMSkills.lUNAR_ECLIPSE;
+            case "thunder_fist" -> () -> WOMSkills.FLASH_MUTILATION;
+            case "iron_fist" -> () -> WOMSkills.DEMONIC_ASCENSION;
+            case "flame_fist" -> () -> WOMSkills.SOLAR_ARCANO;
+            case "god_fist" -> () -> WOMSkills.REGIERUNG;
+            default -> () -> WOMSkills.AGONY_PLUNGE;
+        };
+    }
+
+    /** Weapon passive skill of the style (null when its animations do not need one). */
+    private static Skill passiveSkill(StyleDef def) {
+        return switch (def.presetId()) {
+            case "heavy_fist", "drunken_fist" -> WOMSkills.TORMENT_PASSIVE;
+            case "shadow_fist" -> WOMSkills.LUNAR_ECHO_PASSIVE;
+            case "iron_fist" -> WOMSkills.DEMON_MARK_PASSIVE;
+            case "flame_fist" -> WOMSkills.SOLAR_PASSIVE;
+            case "god_fist" -> WOMSkills.HERRSCHER_PASSIVE;
+            default -> null;
+        };
     }
 
     /**
