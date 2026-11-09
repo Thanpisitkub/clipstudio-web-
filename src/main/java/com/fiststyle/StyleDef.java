@@ -31,10 +31,10 @@ public record StyleDef(int number, String presetId, String internalName, double 
 
 
     public static final List<StyleDef> ALL = List.of(
-        // 1. Light Fist: the Blackstar set, fast (no weapon skill / gauge needed). Jumping attack: Agony.
+        // 1. Light Fist: the Satsujin (katana) set, fast; jumping attack from Agony. Its passive is the gauge-less copy (QuietPassives).
         new StyleDef(1, "light_fist", "Light Fist", 3.90, 5.00, AGONY_STANCE, new String[] {
-            "Blackstar.BLACKSTAR_ATTACK_1", "Blackstar.BLACKSTAR_ATTACK_2", "Blackstar.BLACKSTAR_ATTACK_3", "Blackstar.BLACKSTAR_ATTACK_4",
-            "Blackstar.BLACKSTAR_CHOCKNWAVE", "Agony.AGONY_AIR_ATTACK_2"}),
+            "Satsujin.SATSUJIN_AUTO_1", "Satsujin.SATSUJIN_AUTO_2", "Satsujin.SATSUJIN_AUTO_3", "Satsujin.SATSUJIN_TSUKUYOMI",
+            "Satsujin.SATSUJIN_HARUSAKI", "Agony.AGONY_AIR_ATTACK_2"}),
 
         // 2. Heavy Fist: the Torment (axe) heavy moveset, slow and powerful.
         new StyleDef(2, "heavy_fist", "Heavy Fist", 5.00, 8.00,
@@ -91,11 +91,10 @@ public record StyleDef(int number, String presetId, String internalName, double 
             "Sanji.DIABLE_AUTO_3|Blackstar.BLACKSTAR_ATTACK_3", "Sanji.DIABLE_AUTO_4|Blackstar.BLACKSTAR_ATTACK_4",
             "Sanji.DIABLE_ANTIMANER|Blackstar.BLACKSTAR_CHOCKNWAVE", "Sanji.DIABLE_ANTIMANER|Agony.AGONY_AIR_ATTACK_1"}),
 
-        // 11. Phantom Fist: the Ender Blaster two-hand set (no weapon skill / gauge needed), jump kick as the jumping attack.
+        // 11. Phantom Fist: the Ruine set. Its passive is the gauge-less copy (QuietPassives).
         new StyleDef(11, "phantom_fist", "Phantom Fist", 3.80, 5.50, AGONY_STANCE, new String[] {
-            "Enderblaster.ENDERBLASTER_TWOHAND_AUTO_1", "Enderblaster.ENDERBLASTER_TWOHAND_AUTO_2",
-            "Enderblaster.ENDERBLASTER_TWOHAND_AUTO_3", "Enderblaster.ENDERBLASTER_TWOHAND_AUTO_4",
-            "Enderblaster.ENDERBLASTER_ONEHAND_DASH", "Enderblaster.ENDERBLASTER_ONEHAND_JUMPKICK"}),
+            "Ruine.RUINE_AUTO_1", "Ruine.RUINE_AUTO_2", "Ruine.RUINE_AUTO_3", "Ruine.RUINE_AUTO_4",
+            "Ruine.RUINE_CHATIMENT", "Ruine.RUINE_COMET"}),
 
         // 12. God Fist: the Herrscher set.
         new StyleDef(12, "god_fist", "God Fist", 5.50, 8.00,
