@@ -73,3 +73,11 @@ jobs:
         run: |
           gh release delete latest-jar --yes --cleanup-tag || true
           gh release create latest-jar build/libs/fiststyle-1.20.1.jar --title "Fight Style 1.20.1" --notes "Built automatically from main."
+
+      - name: Publish this version to Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          ver=$(grep -m1 '^version=' src/main/resources/META-INF/mods.toml | cut -d'"' -f2)
+          gh release delete "v$ver" --yes --cleanup-tag || true
+          gh release create "v$ver" build/libs/fiststyle-1.20.1.jar --title "Fight Style v$ver" --notes-file CHANGELOG.md

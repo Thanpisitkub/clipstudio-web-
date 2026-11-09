@@ -72,7 +72,9 @@ public class FistStyle {
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
-        LOGGER.info("Fight Style loaded: {} styles, Sanji animations {}", StyleDef.ALL.size(),
+        String version = net.minecraftforge.fml.ModList.get().getModContainerById(MODID)
+            .map(container -> container.getModInfo().getVersion().toString()).orElse("?");
+        LOGGER.info("Fight Style v{} loaded: {} styles, Sanji animations {}", version, StyleDef.ALL.size(),
             SanjiAnimations.available() ? "available" : "not added to the jar (fallback moves are used)");
     }
 }

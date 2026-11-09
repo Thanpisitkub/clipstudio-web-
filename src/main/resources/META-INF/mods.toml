@@ -4,11 +4,11 @@ license="MIT"
 
 [[mods]]
 modId="fiststyle"
-version="1.20.1"
+version="1.8.0"
 displayName="Fight Style"
 logoFile="logo.png"
 description='''
-Twelve invisible "Fight Style" items that switch you to a different Epic Fight fist style,
+Thirteen invisible "Fight Style" items that switch you to a different Epic Fight fist style,
 using Weapons of Miracles movesets.
 '''
 
