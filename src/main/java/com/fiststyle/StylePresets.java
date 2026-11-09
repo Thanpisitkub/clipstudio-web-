@@ -1,15 +1,20 @@
 package com.fiststyle;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import reascer.wom.gameasset.WOMSkills;
 import reascer.wom.gameasset.colliders.WOMWeaponColliders;
 import yesman.epicfight.api.animation.AnimationManager;
 import yesman.epicfight.api.animation.LivingMotions;
+import yesman.epicfight.api.animation.property.AnimationProperty;
 import yesman.epicfight.api.animation.types.AttackAnimation;
 import yesman.epicfight.api.animation.types.StaticAnimation;
 import yesman.epicfight.api.asset.AssetAccessor;
@@ -28,6 +33,8 @@ import yesman.epicfight.world.capabilities.item.WeaponCapability;
 public final class StylePresets {
     /** The animations each style really uses (after the Sanji fallbacks were resolved), used to find the combo step of a hit. */
     private static final Map<String, AnimationManager.AnimationAccessor<?>[]> RESOLVED = new ConcurrentHashMap<>();
+    /** Styles whose animation speed was already applied (the weapon type can be built more than once). */
+    private static final Set<String> SPEED_APPLIED = ConcurrentHashMap.newKeySet();
 
     private StylePresets() {
     }
@@ -71,8 +78,49 @@ public final class StylePresets {
         }
 
         RESOLVED.put(def.presetId(), combo);
+        applyAnimationSpeed(def, combo);
         builder.newStyleCombo(CapabilityItem.Styles.TWO_HAND, combo);
         return builder;
+    }
+
+    /**
+     * Changes how fast the style's combo animations play (config "animationSpeed": Light Fist faster, Heavy Fist slower).
+     * Epic Fight keeps one object per animation and Weapons of Miracles weapons use the same ones, so the change only
+     * applies while the player holds this style's item. The attack speed of the item (2.10) is not touched.
+     */
+    private static void applyAnimationSpeed(StyleDef def, AnimationManager.AnimationAccessor<? extends AttackAnimation>[] combo) {
+        if (!SPEED_APPLIED.add(def.presetId())) {
+            return;
+        }
+
+        Set<Object> done = new HashSet<>();
+
+        for (AnimationManager.AnimationAccessor<? extends AttackAnimation> accessor : combo) {
+            if (done.add(accessor.get())) {
+                scaleSpeed(accessor, def);
+            }
+        }
+    }
+
+    private static void scaleSpeed(AnimationManager.AnimationAccessor<? extends StaticAnimation> accessor, StyleDef def) {
+        StaticAnimation animation = accessor.get();
+        AnimationProperty.PlaybackSpeedModifier previous = animation
+            .getProperty(AnimationProperty.StaticAnimationProperty.PLAY_SPEED_MODIFIER)
+            .orElse(null);
+        animation.addProperty(AnimationProperty.StaticAnimationProperty.PLAY_SPEED_MODIFIER,
+            (self, entitypatch, speed, prevElapsedTime, elapsedTime) -> {
+                float base = previous == null
+                    ? speed
+                    : previous.modify(self, entitypatch, speed, prevElapsedTime, elapsedTime);
+                Entity entity = entitypatch.getOriginal();
+
+                if (entity instanceof LivingEntity living
+                    && living.getMainHandItem().getItem() instanceof StyleItem item && item.getDef() == def) {
+                    return base * (float) FistConfig.animationSpeed(def);
+                }
+
+                return base;
+            });
     }
 
     private static void motion(WeaponCapability.Builder builder, LivingMotions motion, String name, StyleDef def) {

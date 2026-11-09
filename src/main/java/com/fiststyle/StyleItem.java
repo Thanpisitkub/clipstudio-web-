@@ -53,7 +53,5 @@ public class StyleItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
         tooltip.add(Component.literal(this.def.internalName()).withStyle(ChatFormatting.GOLD));
-        tooltip.add(Component.literal(String.format("Combo damage: %.2f - %.2f", FistConfig.min(this.def), FistConfig.max(this.def)))
-            .withStyle(ChatFormatting.GRAY));
     }
 }

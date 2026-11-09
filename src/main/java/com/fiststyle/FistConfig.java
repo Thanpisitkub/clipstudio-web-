@@ -32,6 +32,7 @@ public final class FistConfig {
     private static final Map<Integer, ForgeConfigSpec.DoubleValue> MIN = new HashMap<>();
     private static final Map<Integer, ForgeConfigSpec.DoubleValue> MAX = new HashMap<>();
     private static final Map<Integer, ForgeConfigSpec.DoubleValue> SPEED = new HashMap<>();
+    private static final Map<Integer, ForgeConfigSpec.DoubleValue> ANIM_SPEED = new HashMap<>();
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -44,6 +45,8 @@ public final class FistConfig {
                 .defineInRange("damageMax", def.defaultMax(), 0.0D, 1000.0D));
             SPEED.put(def.number(), builder.comment("Attack speed")
                 .defineInRange("attackSpeed", StyleDef.ATTACK_SPEED, 0.1D, 20.0D));
+            ANIM_SPEED.put(def.number(), builder.comment("How fast the combo animations play while this item is held (1.0 = normal, 1.2 = 20% faster). The attack speed above is not changed.")
+                .defineInRange("animationSpeed", defaultAnimationSpeed(def), 0.3D, 3.0D));
             builder.pop();
         }
 
@@ -66,6 +69,23 @@ public final class FistConfig {
             return Math.max(MAX.get(def.number()).get(), min(def));
         } catch (IllegalStateException notLoadedYet) {
             return def.defaultMax();
+        }
+    }
+
+    /** Light Fist plays its animations faster, Heavy Fist a little slower, all other styles at normal speed. */
+    private static double defaultAnimationSpeed(StyleDef def) {
+        return switch (def.presetId()) {
+            case "light_fist" -> 1.20D;
+            case "heavy_fist" -> 0.90D;
+            default -> 1.0D;
+        };
+    }
+
+    public static double animationSpeed(StyleDef def) {
+        try {
+            return ANIM_SPEED.get(def.number()).get();
+        } catch (IllegalStateException notLoadedYet) {
+            return defaultAnimationSpeed(def);
         }
     }
 

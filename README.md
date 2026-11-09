@@ -29,6 +29,7 @@
 ## ตั้งค่า (ไม่ต้อง build ใหม่)
 
 - `<โลก>/serverconfig/fiststyle-server.toml` : ดาเมจต่ำสุด/สูงสุด และ attack speed ของแต่ละสไตล์ (คำนวณฝั่งเซิร์ฟเวอร์เท่านั้น)
+  `animationSpeed` ปรับความเร็วเล่นท่าเฉพาะตอนถือไอเท็มสไตล์นั้น (Light Fist 1.20 เร็วขึ้น, Heavy Fist 0.90 ช้าลงนิดหน่อย, สไตล์อื่น 1.00) โดย attack speed ยังเป็น 2.10
 - `config/fiststyle-combos.json` : ชื่อ animation ของแต่ละสไตล์ (ท่ายืน/เดิน/วิ่ง/ป้องกัน และคอมโบ 6 ช่อง) สร้างให้ตอนรันเกมครั้งแรก
   ชื่อใช้รูปแบบ `Class.FIELD` เช่น `Agony.AGONY_AUTO_1` (คลาส: WOM, Agony, Enderblaster, Nova, Orbit, Moonless, Blackstar, Solar, Ruine, Herrscher, Sanji)
   เขียน `A|B` ได้ ถ้าไม่มี A จะใช้ B
