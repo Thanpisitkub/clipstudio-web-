@@ -24,7 +24,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-/** Fight Style: 12 invisible items that switch the player to one of 12 Epic Fight fist styles. */
+/** Fight Style: 13 invisible items that switch the player to one of 13 Epic Fight fist styles. */
 @Mod(FistStyle.MODID)
 public class FistStyle {
     public static final String MODID = "fiststyle";
@@ -33,7 +33,7 @@ public class FistStyle {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
-    /** fiststyle:fight_style_1 ... fiststyle:fight_style_12, in order. Plain Items (not BlockItems), so none can place a block. */
+    /** fiststyle:fight_style_1 ... fiststyle:fight_style_13, in order. Plain Items (not BlockItems), so none can place a block. */
     public static final List<RegistryObject<Item>> STYLE_ITEMS = new ArrayList<>();
 
     static {

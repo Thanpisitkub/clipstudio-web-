@@ -72,10 +72,11 @@ public final class FistConfig {
         }
     }
 
-    /** Light Fist plays its animations faster, Heavy Fist a little slower, all other styles at normal speed. */
+    /** Light Fist and Phantom Fist play their animations faster, Heavy Fist a little slower, all other styles at normal speed. */
     private static double defaultAnimationSpeed(StyleDef def) {
         return switch (def.presetId()) {
-            case "light_fist" -> 1.20D;
+            case "light_fist" -> 1.40D;
+            case "phantom_fist" -> 1.30D;
             case "heavy_fist" -> 0.90D;
             default -> 1.0D;
         };

@@ -19,7 +19,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 
 /**
- * One of the 12 "Fight Style" items. It is a plain item (it can not place a block). Holding it activates the matching
+ * One of the 13 "Fight Style" items. It is a plain item (it can not place a block). Holding it activates the matching
  * Epic Fight weapon type (data/fiststyle/capabilities/weapons/&lt;item&gt;.json), and its attack damage / attack speed attributes
  * come from the server config, so the tooltip reads like a vanilla weapon.
  */

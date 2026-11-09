@@ -26,7 +26,7 @@ import yesman.epicfight.skill.Skill;
 import yesman.epicfight.world.capabilities.item.WeaponCapability;
 
 /**
- * The 12 Epic Fight weapon types ("presets") fiststyle:light_fist ... fiststyle:god_fist.
+ * The 13 Epic Fight weapon types ("presets") fiststyle:light_fist ... fiststyle:sanji_fist.
  *
  * <p>Epic Fight does the rest of the work for these types: it plays the combo in order, resets it when the player stops
  * attacking, refuses to start a new attack animation while another one is running, hits every target once per attack phase,
@@ -103,7 +103,6 @@ public final class StylePresets {
             case "shadow_fist" -> () -> WOMSkills.lUNAR_ECLIPSE;
             case "thunder_fist" -> () -> WOMSkills.FLASH_MUTILATION;
             case "iron_fist" -> () -> WOMSkills.DEMONIC_ASCENSION;
-            case "flame_fist" -> () -> WOMSkills.SOLAR_ARCANO;
             case "god_fist" -> () -> WOMSkills.REGIERUNG;
             default -> () -> WOMSkills.AGONY_PLUNGE;
         };
@@ -115,7 +114,6 @@ public final class StylePresets {
             case "heavy_fist", "drunken_fist" -> WOMSkills.TORMENT_PASSIVE;
             case "shadow_fist" -> WOMSkills.LUNAR_ECHO_PASSIVE;
             case "iron_fist" -> WOMSkills.DEMON_MARK_PASSIVE;
-            case "flame_fist" -> WOMSkills.SOLAR_PASSIVE;
             case "god_fist" -> WOMSkills.HERRSCHER_PASSIVE;
             default -> null;
         };

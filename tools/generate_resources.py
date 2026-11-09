@@ -26,6 +26,7 @@ STYLES = [
     (10, "flame_fist", "Flame Fist", 2.0, 15.0, 4),
     (11, "phantom_fist", "Phantom Fist", 1.3, 30.0, 2),
     (12, "god_fist", "God Fist", 3.5, 40.0, 4),
+    (13, "sanji_fist", "Sanji Fist", 1.0, 0.0, 4),
 ]
 
 YELLOW = (255, 221, 0, 255)

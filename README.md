@@ -1,7 +1,7 @@
 # Fight Style
 
-ม็อดสไตล์การต่อสู้สำหรับ Epic Fight (Minecraft 1.20.1, Forge, Java 17) มีไอเท็ม 12 ชิ้น
-ชื่อ **Fight Style 1** ถึง **Fight Style 12** อยู่ในแท็บ Creative ชื่อ "Fight Style"
+ม็อดสไตล์การต่อสู้สำหรับ Epic Fight (Minecraft 1.20.1, Forge, Java 17) มีไอเท็ม 13 ชิ้น
+ชื่อ **Fight Style 1** ถึง **Fight Style 13** อยู่ในแท็บ Creative ชื่อ "Fight Style"
 
 ต้องติดตั้งคู่กัน: Epic Fight 20.14.17 และ Weapons of Miracles 2.0.171
 ไอเท็มทุกชิ้นใช้ไอคอนเดียวกัน (ตัว F สีเหลืองบนพื้นดำ) และมองไม่เห็นในมือทั้งมุมมองบุคคลที่ 1 และ 3
@@ -19,9 +19,10 @@
 | Fight Style 7 | `fiststyle:fight_style_7` | Thunder Fist | Nova | 4.00 – 5.80 |
 | Fight Style 8 | `fiststyle:fight_style_8` | Wind Fist | Epic Sanji (สำรอง: Blackstar) | 3.50 – 5.00 |
 | Fight Style 9 | `fiststyle:fight_style_9` | Iron Fist | Antitheus | 5.00 – 7.50 |
-| Fight Style 10 | `fiststyle:fight_style_10` | Flame Fist | Epic Sanji Diable Jambe (สำรอง: Solar Obscuridad) | 4.50 – 6.50 |
+| Fight Style 10 | `fiststyle:fight_style_10` | Flame Fist | Epic Sanji Diable Jambe (สำรอง: Blackstar) ไม่มีหลอด Solar | 4.50 – 6.50 |
 | Fight Style 11 | `fiststyle:fight_style_11` | Phantom Fist | Ender Blaster สองมือ | 3.80 – 5.50 |
 | Fight Style 12 | `fiststyle:fight_style_12` | God Fist | Herrscher | 5.50 – 8.00 |
+| Fight Style 13 | `fiststyle:fight_style_13` | Sanji Fist | Epic Sanji (สำรอง: Blackstar) ท่ายืน/วิ่ง Blackstar, ท่ากระโดด = Ender Blaster สองมือ (Tishnaw) | 4.00 – 5.60 |
 
 ทุกสไตล์ attack speed 2.10 ช่วงดาเมจของ Light Fist และ Heavy Fist ตามที่กำหนด ส่วนสไตล์อื่นเป็นค่าที่ผมตั้งให้เอง (แก้ได้ใน config)
 คอมโบมี 6 ช่อง: หมัด 1, 2, 3, 4, ท่าวิ่ง, ท่ากระโดด ดาเมจหมัด 1–4 ไล่จากค่าต่ำสุดไปสูงสุด ท่าวิ่งและท่ากระโดดใช้ค่ากลาง
@@ -29,7 +30,7 @@
 ## ตั้งค่า (ไม่ต้อง build ใหม่)
 
 - `<โลก>/serverconfig/fiststyle-server.toml` : ดาเมจต่ำสุด/สูงสุด และ attack speed ของแต่ละสไตล์ (คำนวณฝั่งเซิร์ฟเวอร์เท่านั้น)
-  `animationSpeed` ปรับความเร็วเล่นท่าเฉพาะตอนถือไอเท็มสไตล์นั้น (Light Fist 1.20 เร็วขึ้น, Heavy Fist 0.90 ช้าลงนิดหน่อย, สไตล์อื่น 1.00) โดย attack speed ยังเป็น 2.10
+  `animationSpeed` ปรับความเร็วเล่นท่าเฉพาะตอนถือไอเท็มสไตล์นั้น (Light Fist 1.40 และ Phantom Fist 1.30 เร็วขึ้น, Heavy Fist 0.90 ช้าลงนิดหน่อย, สไตล์อื่น 1.00 — ค่าเริ่มต้นใช้เมื่อสร้างไฟล์ใหม่ ถ้ามีไฟล์เก่าอยู่ให้ลบหรือแก้เอง) โดย attack speed ยังเป็น 2.10
 - `config/fiststyle-combos.json` : ชื่อ animation ของแต่ละสไตล์ (ท่ายืน/เดิน/วิ่ง/ป้องกัน และคอมโบ 6 ช่อง) สร้างให้ตอนรันเกมครั้งแรก
   ชื่อใช้รูปแบบ `Class.FIELD` เช่น `Agony.AGONY_AUTO_1` (คลาส: WOM, Agony, Enderblaster, Nova, Orbit, Moonless, Blackstar, Solar, Ruine, Herrscher, Sanji)
   เขียน `A|B` ได้ ถ้าไม่มี A จะใช้ B
@@ -67,6 +68,6 @@ Build เองในเครื่อง: ใส่ `epicfight-20.14.17.jar` �
 
 ## หมายเหตุ: skill ของ Weapons of Miracles
 
-ท่าของ WoM (Moonless, Torment, Herrscher, Solar, Antitheus) อ่านข้อมูลจาก skill ของอาวุธนั้น ๆ ถ้าไม่มี skill เกมจะ crash ("SkillDataKey is unregistered")
+ท่าของ WoM (Moonless, Torment, Herrscher, Antitheus) อ่านข้อมูลจาก skill ของอาวุธนั้น ๆ ถ้าไม่มี skill เกมจะ crash ("SkillDataKey is unregistered")
 แต่ละสไตล์จึงติด skill passive/innate ชุดเดียวกับอาวุธ WoM ที่ท่ามาจาก (เช่น Shadow Fist = Lunar Echo, God Fist = Herrscher)
 ถ้าเคยรันเกมมาแล้ว ให้ลบ `config/fiststyle-combos.json` เพื่อให้สร้างใหม่ (ไฟล์เก่ายังมีท่ายืนของ Drunken Fist และท่ากระโดดของ Flame Fist แบบเดิม)

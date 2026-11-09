@@ -89,11 +89,12 @@ public record StyleDef(int number, String presetId, String internalName, double 
             "WOM.ANTITHEUS_AUTO_1", "WOM.ANTITHEUS_AUTO_2", "WOM.ANTITHEUS_AUTO_3", "WOM.ANTITHEUS_AUTO_4",
             "WOM.ANTITHEUS_AGRESSION", "WOM.ANTITHEUS_GUILLOTINE"}),
 
-        // 10. Flame Fist: Epic Sanji's Diable Jambe kicks (Solar Obscuridad strikes when the Sanji keyframes were not added).
+        // 10. Flame Fist: Epic Sanji's Diable Jambe kicks. No Solar animations (they need the Solar heat gauge), so without the
+        //     Sanji keyframes the Blackstar strikes are used instead.
         new StyleDef(10, "flame_fist", "Flame Fist", 4.50, 6.50, AGONY_STANCE, new String[] {
-            "Sanji.DIABLE_AUTO_1|Solar.SOLAR_OBSCURIDAD_AUTO_1", "Sanji.DIABLE_AUTO_2|Solar.SOLAR_OBSCURIDAD_AUTO_2",
-            "Sanji.DIABLE_AUTO_3|Solar.SOLAR_OBSCURIDAD_AUTO_3", "Sanji.DIABLE_AUTO_4|Solar.SOLAR_OBSCURIDAD_AUTO_4",
-            "Sanji.DIABLE_ANTIMANER|Solar.SOLAR_OBSCURIDAD_IMPACTO", "Sanji.DIABLE_ANTIMANER|Solar.SOLAR_OBSCURIDAD_IMPACTO"}),
+            "Sanji.DIABLE_AUTO_1|Blackstar.BLACKSTAR_ATTACK_1", "Sanji.DIABLE_AUTO_2|Blackstar.BLACKSTAR_ATTACK_2",
+            "Sanji.DIABLE_AUTO_3|Blackstar.BLACKSTAR_ATTACK_3", "Sanji.DIABLE_AUTO_4|Blackstar.BLACKSTAR_ATTACK_4",
+            "Sanji.DIABLE_ANTIMANER|Blackstar.BLACKSTAR_CHOCKNWAVE", "Sanji.DIABLE_ANTIMANER|Agony.AGONY_AIR_ATTACK_1"}),
 
         // 11. Phantom Fist: the Ender Blaster two-hand set.
         new StyleDef(11, "phantom_fist", "Phantom Fist", 3.80, 5.50, AGONY_STANCE, new String[] {
@@ -105,6 +106,14 @@ public record StyleDef(int number, String presetId, String internalName, double 
         new StyleDef(12, "god_fist", "God Fist", 5.50, 8.00,
             stance("Herrscher.HERRSCHER_IDLE", "Herrscher.HERRSCHER_WALK", "Herrscher.HERRSCHER_RUN"), new String[] {
             "Herrscher.HERRSCHER_AUTO_1", "Herrscher.HERRSCHER_AUTO_2", "Herrscher.HERRSCHER_AUTO_3", "Herrscher.HERRSCHER_VERDAMMNIS",
-            "Herrscher.HERRSCHER_BEFREIUNG", "Herrscher.HERRSCHER_AUSROTTUNG"})
+            "Herrscher.HERRSCHER_BEFREIUNG", "Herrscher.HERRSCHER_AUSROTTUNG"}),
+
+        // 13. Sanji Fist: Epic Sanji's four strikes and Concasser run attack (Blackstar when the Sanji keyframes were not added),
+        //     with the two-handed Ender Blaster gun move (Tishnaw) as the jumping attack. Stance and run: Blackstar.
+        new StyleDef(13, "sanji_fist", "Sanji Fist", 4.00, 5.60,
+            stance("Blackstar.BLACKSTAR_IDLE", "Blackstar.BLACKSTAR_WALK", "Blackstar.BLACKSTAR_RUN"), new String[] {
+            "Sanji.AUTO_1|Blackstar.BLACKSTAR_ATTACK_1", "Sanji.AUTO_2|Blackstar.BLACKSTAR_ATTACK_2",
+            "Sanji.AUTO_3|Blackstar.BLACKSTAR_ATTACK_3", "Sanji.AUTO_4|Blackstar.BLACKSTAR_ATTACK_4",
+            "Sanji.CONCASSER|Blackstar.BLACKSTAR_CHOCKNWAVE", "Enderblaster.ENDERBLASTER_TWOHAND_TISHNAW"})
     );
 }
