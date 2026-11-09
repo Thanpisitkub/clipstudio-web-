@@ -98,6 +98,8 @@ public final class StylePresets {
     /** Innate (weapon skill) that goes with the animation set of the style, as on the Weapons of Miracles weapon. */
     private static Supplier<Skill> innateSkill(StyleDef def) {
         return switch (def.presetId()) {
+            case "light_fist" -> () -> WOMSkills.SAKURA_STATE;
+            case "phantom_fist" -> () -> WOMSkills.ENDER_ARCANE;
             case "heavy_fist", "drunken_fist" -> () -> WOMSkills.TRUE_BERSERK;
             case "dragon_fist" -> () -> WOMSkills.ORBITAL_BEAM;
             case "shadow_fist" -> () -> WOMSkills.lUNAR_ECLIPSE;
@@ -111,6 +113,8 @@ public final class StylePresets {
     /** Weapon passive skill of the style (null when its animations do not need one). */
     private static Skill passiveSkill(StyleDef def) {
         return switch (def.presetId()) {
+            case "light_fist" -> WOMSkills.SATSUJIN_PASSIVE;
+            case "phantom_fist" -> WOMSkills.RUINE_PASSIVE;
             case "heavy_fist", "drunken_fist" -> WOMSkills.TORMENT_PASSIVE;
             case "shadow_fist" -> WOMSkills.LUNAR_ECHO_PASSIVE;
             case "iron_fist" -> WOMSkills.DEMON_MARK_PASSIVE;

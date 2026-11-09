@@ -25,6 +25,7 @@ public final class AnimLookup {
         Map.entry("Solar", WEAPONS + "Solar"),
         Map.entry("Ruine", WEAPONS + "Ruine"),
         Map.entry("Herrscher", WEAPONS + "Herrscher"),
+        Map.entry("Satsujin", WEAPONS + "Satsujin"),
         Map.entry("Sanji", "com.fiststyle.SanjiAnimations"));
 
     private AnimLookup() {

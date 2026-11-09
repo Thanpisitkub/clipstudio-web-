@@ -29,40 +29,35 @@ public record StyleDef(int number, String presetId, String internalName, double 
 
     private static final String[] AGONY_STANCE = {"Agony.AGONY_IDLE", "Agony.AGONY_WALK", "Agony.AGONY_RUN", "Agony.AGONY_GUARD"};
 
-    private static String[] stance(String idle, String walk, String run) {
-        return new String[] {idle, walk, run, "Agony.AGONY_GUARD"};
-    }
 
     public static final List<StyleDef> ALL = List.of(
-        // 1. Light Fist: Ender Blaster one-hand punches. PUNCH 3 (the uppercut slot) is ENDERBLASTER_ONEHAND_AUTO_3 and has NOT been
-        //    verified to be an upward punch: check it in game and change it in config/fiststyle-combos.json if needed.
+        // 1. Light Fist: the Satsujin (katana) set, fast. Jumping attack: Agony.
         new StyleDef(1, "light_fist", "Light Fist", 3.90, 5.00, AGONY_STANCE, new String[] {
-            "Enderblaster.ENDERBLASTER_ONEHAND_AUTO_1", "Enderblaster.ENDERBLASTER_ONEHAND_AUTO_2",
-            "Enderblaster.ENDERBLASTER_ONEHAND_AUTO_3", "Enderblaster.ENDERBLASTER_ONEHAND_AUTO_4",
-            "Agony.AGONY_CLAWSTRIKE", "Agony.AGONY_RIPPING_FANGS"}),
+            "Satsujin.SATSUJIN_AUTO_1", "Satsujin.SATSUJIN_AUTO_2", "Satsujin.SATSUJIN_AUTO_3", "Satsujin.SATSUJIN_TSUKUYOMI",
+            "Satsujin.SATSUJIN_HARUSAKI", "Agony.AGONY_AIR_ATTACK_2"}),
 
         // 2. Heavy Fist: the Torment (axe) heavy moveset, slow and powerful.
         new StyleDef(2, "heavy_fist", "Heavy Fist", 5.00, 8.00,
-            stance("WOM.TORMENT_IDLE", "WOM.TORMENT_WALK", "WOM.TORMENT_RUN"), new String[] {
+            AGONY_STANCE, new String[] {
             "WOM.TORMENT_AUTO_1", "WOM.TORMENT_AUTO_2", "WOM.TORMENT_AUTO_3", "WOM.TORMENT_AUTO_4",
             "WOM.TORMENT_DASH", "WOM.TORMENT_AIRSLAM"}),
 
         // 3. Drunken Fist: reuses the Heavy Fist animations in a different order (same Torment stance: mixing in Moonless
         //    would need a second weapon passive skill, and a player can only have one).
         new StyleDef(3, "drunken_fist", "Drunken Fist", 4.50, 7.00,
-            stance("WOM.TORMENT_IDLE", "WOM.TORMENT_WALK", "WOM.TORMENT_RUN"), new String[] {
+            AGONY_STANCE, new String[] {
             "WOM.TORMENT_AUTO_3", "WOM.TORMENT_AUTO_1", "WOM.TORMENT_AUTO_4", "WOM.TORMENT_AUTO_2",
             "WOM.TORMENT_DASH", "WOM.TORMENT_AIRSLAM"}),
 
         // 4. Dragon Fist: the Orbit set.
         new StyleDef(4, "dragon_fist", "Dragon Fist", 4.20, 6.00,
-            stance("Orbit.ORBIT_IDLE", "Orbit.ORBIT_WALK", "Orbit.ORBIT_RUN"), new String[] {
+            AGONY_STANCE, new String[] {
             "Orbit.ORBIT_ATTACK_1", "Orbit.ORBIT_ATTACK_2", "Orbit.ORBIT_ATTACK_3", "Orbit.ORBIT_ATTACK_4",
             "Orbit.ORBIT_SATELITE", "Orbit.ORBIT_MAD_REACH"}),
 
         // 5. Shadow Fist: the Moonless set (normal and verso strikes).
         new StyleDef(5, "shadow_fist", "Shadow Fist", 3.60, 5.20,
-            stance("Moonless.MOONLESS_IDLE", "Moonless.MOONLESS_WALK", "Moonless.MOONLESS_RUN"), new String[] {
+            AGONY_STANCE, new String[] {
             "Moonless.MOONLESS_AUTO_1", "Moonless.MOONLESS_AUTO_2", "Moonless.MOONLESS_AUTO_3", "Moonless.MOONLESS_AUTO_3_VERSO",
             "Moonless.MOONLESS_BYPASS", "Moonless.MOONLESS_CRESCENT"}),
 
@@ -73,7 +68,7 @@ public record StyleDef(int number, String presetId, String internalName, double 
 
         // 7. Thunder Fist: the Nova set.
         new StyleDef(7, "thunder_fist", "Thunder Fist", 4.00, 5.80,
-            stance("Nova.NOVA_IDLE", "Nova.NOVA_WALK", "Nova.NOVA_RUN"), new String[] {
+            AGONY_STANCE, new String[] {
             "Nova.NOVA_ATTACK_1", "Nova.NOVA_ATTACK_2", "Nova.NOVA_ATTACK_3", "Nova.NOVA_ATTACK_4",
             "Nova.NOVA_ATTACK_DASH", "Nova.NOVA_ATTACK_AIRSLASH"}),
 
@@ -85,7 +80,7 @@ public record StyleDef(int number, String presetId, String internalName, double 
 
         // 9. Iron Fist: the Antitheus set, heavy and armour-piercing.
         new StyleDef(9, "iron_fist", "Iron Fist", 5.00, 7.50,
-            stance("WOM.ANTITHEUS_IDLE", "WOM.ANTITHEUS_WALK", "WOM.ANTITHEUS_RUN"), new String[] {
+            AGONY_STANCE, new String[] {
             "WOM.ANTITHEUS_AUTO_1", "WOM.ANTITHEUS_AUTO_2", "WOM.ANTITHEUS_AUTO_3", "WOM.ANTITHEUS_AUTO_4",
             "WOM.ANTITHEUS_AGRESSION", "WOM.ANTITHEUS_GUILLOTINE"}),
 
@@ -96,22 +91,21 @@ public record StyleDef(int number, String presetId, String internalName, double 
             "Sanji.DIABLE_AUTO_3|Blackstar.BLACKSTAR_ATTACK_3", "Sanji.DIABLE_AUTO_4|Blackstar.BLACKSTAR_ATTACK_4",
             "Sanji.DIABLE_ANTIMANER|Blackstar.BLACKSTAR_CHOCKNWAVE", "Sanji.DIABLE_ANTIMANER|Agony.AGONY_AIR_ATTACK_1"}),
 
-        // 11. Phantom Fist: the Ender Blaster two-hand set.
+        // 11. Phantom Fist: the Ruine set.
         new StyleDef(11, "phantom_fist", "Phantom Fist", 3.80, 5.50, AGONY_STANCE, new String[] {
-            "Enderblaster.ENDERBLASTER_TWOHAND_AUTO_1", "Enderblaster.ENDERBLASTER_TWOHAND_AUTO_2",
-            "Enderblaster.ENDERBLASTER_TWOHAND_AUTO_3", "Enderblaster.ENDERBLASTER_TWOHAND_AUTO_4",
-            "Enderblaster.ENDERBLASTER_ONEHAND_DASH", "Enderblaster.ENDERBLASTER_TWOHAND_TISHNAW"}),
+            "Ruine.RUINE_AUTO_1", "Ruine.RUINE_AUTO_2", "Ruine.RUINE_AUTO_3", "Ruine.RUINE_AUTO_4",
+            "Ruine.RUINE_CHATIMENT", "Ruine.RUINE_COMET"}),
 
         // 12. God Fist: the Herrscher set.
         new StyleDef(12, "god_fist", "God Fist", 5.50, 8.00,
-            stance("Herrscher.HERRSCHER_IDLE", "Herrscher.HERRSCHER_WALK", "Herrscher.HERRSCHER_RUN"), new String[] {
+            AGONY_STANCE, new String[] {
             "Herrscher.HERRSCHER_AUTO_1", "Herrscher.HERRSCHER_AUTO_2", "Herrscher.HERRSCHER_AUTO_3", "Herrscher.HERRSCHER_VERDAMMNIS",
             "Herrscher.HERRSCHER_BEFREIUNG", "Herrscher.HERRSCHER_AUSROTTUNG"}),
 
         // 13. Sanji Fist: Epic Sanji's four strikes and Concasser run attack (Blackstar when the Sanji keyframes were not added),
-        //     with the two-handed Ender Blaster gun move (Tishnaw) as the jumping attack. Stance and run: Blackstar.
+        //     with the two-handed Ender Blaster gun move (Tishnaw) as the jumping attack.
         new StyleDef(13, "sanji_fist", "Sanji Fist", 4.00, 5.60,
-            stance("Blackstar.BLACKSTAR_IDLE", "Blackstar.BLACKSTAR_WALK", "Blackstar.BLACKSTAR_RUN"), new String[] {
+            AGONY_STANCE, new String[] {
             "Sanji.AUTO_1|Blackstar.BLACKSTAR_ATTACK_1", "Sanji.AUTO_2|Blackstar.BLACKSTAR_ATTACK_2",
             "Sanji.AUTO_3|Blackstar.BLACKSTAR_ATTACK_3", "Sanji.AUTO_4|Blackstar.BLACKSTAR_ATTACK_4",
             "Sanji.CONCASSER|Blackstar.BLACKSTAR_CHOCKNWAVE", "Enderblaster.ENDERBLASTER_TWOHAND_TISHNAW"})
