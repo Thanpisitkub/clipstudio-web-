@@ -89,6 +89,7 @@ public final class StylePresets {
             }
         }
 
+        FistStyle.LOGGER.info("{} combo: {}", def.presetId(), String.join(", ", names));
         RESOLVED.put(def.presetId(), combo);
         applyAnimationSpeed(def, combo);
         builder.newStyleCombo(CapabilityItem.Styles.TWO_HAND, combo);

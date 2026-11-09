@@ -109,13 +109,24 @@ public final class FistConfig {
         return FMLPaths.CONFIGDIR.get().resolve("fiststyle-combos.json");
     }
 
-    /** Writes the default animation names when the file does not exist, then loads it. */
+    /** Raise this number whenever the built-in animation lists change: an older config file is then replaced (the old one is kept as .bak). */
+    private static final int DEFAULTS_VERSION = 2;
+    private static final String VERSION_KEY = "_defaultsVersion";
+
+    /** Writes the default animation names when the file does not exist or came from older defaults, then loads it. */
     public static synchronized void loadComboOverrides() {
         Path file = comboFile();
 
         try {
+            if (Files.exists(file) && readVersion(file) != DEFAULTS_VERSION) {
+                Path backup = file.resolveSibling(file.getFileName() + ".bak");
+                Files.move(file, backup, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                FistStyle.LOGGER.warn("{} was written for older Fight Style animations; it was moved to {} and a new one is created.", file, backup);
+            }
+
             if (!Files.exists(file)) {
                 JsonObject defaults = new JsonObject();
+                defaults.addProperty(VERSION_KEY, DEFAULTS_VERSION);
 
                 for (StyleDef def : StyleDef.ALL) {
                     JsonObject entry = new JsonObject();
@@ -137,6 +148,20 @@ public final class FistConfig {
             FistStyle.LOGGER.warn("Could not read {}: {}. Using the built-in animation names.", file, e.toString());
             overrides = new JsonObject();
         }
+    }
+
+    private static int readVersion(Path file) {
+        try (Reader reader = Files.newBufferedReader(file)) {
+            JsonElement parsed = JsonParser.parseReader(reader);
+
+            if (parsed.isJsonObject() && parsed.getAsJsonObject().has(VERSION_KEY)) {
+                return parsed.getAsJsonObject().get(VERSION_KEY).getAsInt();
+            }
+        } catch (IOException | RuntimeException ignored) {
+            // unreadable file: treated as old
+        }
+
+        return -1;
     }
 
     public static String[] combo(StyleDef def) {
