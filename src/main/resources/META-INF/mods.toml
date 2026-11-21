@@ -1,0 +1,31 @@
+modLoader = "javafml"
+loaderVersion = "[47,)"
+license = "MIT"
+
+[[mods]]
+modId = "adminmenu"
+version = "${version}"
+displayName = "Admin Menu"
+description = "In-game admin menu: gamemode, teleport, kill, open other players' inventories (via Inv View), give items, spectate and skills. Colour theme can be changed."
+
+[[dependencies.adminmenu]]
+modId = "forge"
+mandatory = true
+versionRange = "[47,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.adminmenu]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.1,1.21)"
+ordering = "NONE"
+side = "BOTH"
+
+# Optional but recommended: the Items tab runs "/view inv <player>" from Inv View
+[[dependencies.adminmenu]]
+modId = "inv_view"
+mandatory = false
+versionRange = "[4,)"
+ordering = "AFTER"
+side = "BOTH"

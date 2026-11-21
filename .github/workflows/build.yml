@@ -1,0 +1,58 @@
+name: Build Admin Menu jar
+
+permissions:
+  contents: write
+
+on:
+  push:
+    branches: [ admin-menu ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.8'
+
+      - name: Build
+        shell: bash
+        run: |
+          set -o pipefail
+          gradle build --no-daemon 2>&1 | tee build.log
+
+      - name: Publish compile errors on failure
+        if: failure()
+        run: |
+          grep -E "error:|symbol:|location:|What went wrong" -A2 build.log | head -200 > /tmp/errors.txt || true
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git checkout --orphan adminmenu-build-errors
+          git rm -rf . -q || true
+          cp /tmp/errors.txt errors.txt
+          git add errors.txt
+          git commit -q -m "build errors"
+          git push -f origin adminmenu-build-errors
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: adminmenu-jar
+          path: build/libs/adminmenu-forge-1.20.1-*.jar
+          if-no-files-found: error
+
+      - name: Publish jar to Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete adminmenu-latest --yes --cleanup-tag || true
+          gh release create adminmenu-latest build/libs/adminmenu-forge-1.20.1-*.jar \
+            --target admin-menu --title "Admin Menu (Forge 1.20.1)" \
+            --notes "Built automatically from the admin-menu branch. Needs the Inv View mod for the Items tab."
